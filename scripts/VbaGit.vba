@@ -679,12 +679,13 @@ Private Function writeToStagingArea(infoJob As cJobject, dependencyList As cJobj
             .findInArray("name", job.toString("name")) _
             .parent _
             .getObject("module")
-        
-        writeToFolderFile job.toString("folder"), job.toString("fileName"), _
-            modl.vCom.codeModule.Lines(1, modl.vCom.codeModule.CountOfLines)
+        If modl.vCom.codeModule.CountOfLines <> 0 Then
+            writeToFolderFile job.toString("folder"), job.toString("fileName"), _
+                modl.vCom.codeModule.Lines(1, modl.vCom.codeModule.CountOfLines)
 
-        writeToFolderFile job.toString("folder"), job.toString("docsName"), _
-                makeArguments(modl, infoJob)
+            writeToFolderFile job.toString("folder"), job.toString("docsName"), _
+                    makeArguments(modl, infoJob)   
+        End if
     Next job
 
 End Function
